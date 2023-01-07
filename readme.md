@@ -26,7 +26,7 @@ The feactures implemented on the backend side API are:
 
 - Run Scripts on docker container
 
-## Steps to run the application
+## Installation Guide
 
 [click here for installation guide](docs/installation_guide.md)
 
