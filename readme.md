@@ -2,6 +2,14 @@
 
 C-BAS is a tool developed to run breach and attack simulation on dockerized containers at the process level. This project uses Django backend along with [react app](https://github.com/WaleedK2000/C-BAS_frontend) as its frontend.
 
+## Tools and Technologies
+
+- Django
+- Docker SDK for Python
+- Docker
+
+You can view the documentation for docker sdk for python [here](https://docker-py.readthedocs.io/en/stable/index.html)
+
 ## Features Implemented
 
 The feactures implemented on the backend side API are:
