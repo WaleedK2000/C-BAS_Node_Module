@@ -25,6 +25,7 @@ The feactures implemented on the backend side API are:
 ## Features To Be implemented
 
 - Run Scripts on docker container
+- Run Script to check docker socket vulnerability
 
 ## Installation Guide
 
