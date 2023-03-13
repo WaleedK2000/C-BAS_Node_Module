@@ -104,6 +104,7 @@ def executeExploit1(request):
 def executePIDshell(request):
 
     pid_path = './scripts/pid.sh'
+    os.chmod(pid_path, 0o755) 
 
     output = subprocess.check_output(pid_path).decode()
     return Response({'execution': '200', 'output': output, 'result': True})
