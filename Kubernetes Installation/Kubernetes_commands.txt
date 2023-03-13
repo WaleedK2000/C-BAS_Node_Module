@@ -1,0 +1,11 @@
+kubectl get all
+kubectl get configmap
+kubectl get secret
+kubectl describe service webapp-service
+kubectl logs webapp-deployment-649d7fb885-mrpfl
+kubectl logs webapp-deployment-649d7fb885-mrpfl -f
+kubectl get svc
+minikube ip
+kubectl get node -o wide
+kubectl get svc -o wide
+kubectl get pods -o wide
