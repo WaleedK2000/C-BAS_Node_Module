@@ -94,8 +94,9 @@ def executeExploit1(request):
         result =  subs in ter
  
         response = {"status": "Container Found",
+            'execution': '200',
             "result": result,
-            "m": ter
+            "output": ter,
          }
         return Response(response)
 
@@ -105,7 +106,7 @@ def executePIDshell(request):
     pid_path = './scripts/pid.sh'
 
     output = subprocess.check_output(pid_path).decode()
-    return Response({'message': 'Script executed successfully!', 'output': output})
+    return Response({'execution': '200', 'output': output, 'result': True})
 
     # returncode = shellscript.wait()
     
