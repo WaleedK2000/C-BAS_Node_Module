@@ -109,11 +109,33 @@ def executePIDshell(request):
     output = subprocess.check_output(pid_path).decode()
     return Response({'execution': '200', 'output': output, 'result': True})
 
-    # returncode = shellscript.wait()
-    
-    # response = {'result': result}
+@api_view(['POST'])
+def executeExposeHostFp(request):
 
-    # return Response(response)
+    pid_path = './scripts/expose_host_file_path.sh'
+    os.chmod(pid_path, 0o755) 
+
+    output = subprocess.check_output(pid_path).decode()
+    return Response({'execution': '200', 'output': output, 'result': True})
+
+@api_view(['POST'])
+def executeStressTest(request):
+
+    pid_path = './scripts/stress_test.sh'
+    os.chmod(pid_path, 0o755) 
+
+    output = subprocess.check_output(pid_path).decode()
+    return Response({'execution': '200', 'output': output, 'result': True})
+
+
+@api_view(['POST'])
+def executeShowHashes(request):
+
+    pid_path = './scripts/show_hashes.sh'
+    os.chmod(pid_path, 0o755) 
+
+    output = subprocess.check_output(pid_path).decode()
+    return Response({'execution': '200', 'output': output, 'result': True})
 
 
 # @api_view(['POST'])
