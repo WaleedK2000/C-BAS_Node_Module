@@ -5,6 +5,7 @@ import docker
 import subprocess
 import os
 
+
 @api_view(['GET'])
 def getData(request):
 
@@ -12,7 +13,6 @@ def getData(request):
     lis = client.containers.list()
 
     containerList = []
-    
 
     dictContainer = {}
     if len(lis) > 0:
@@ -20,8 +20,7 @@ def getData(request):
         for container in lis:
             dictContainer[container.name] = container.attrs
 
-
-    response = {"running ": len(lis), "error": "none", "data":dictContainer }
+    response = {"running ": len(lis), "error": "none", "data": dictContainer}
 
     person = {'name': 'Dennis', 'age': 28}
     return Response(response)
@@ -31,13 +30,13 @@ def getData(request):
 def executeExploit(request):
 
     response = {}
-    
+
     client = docker.from_env()
     con = False
     try:
         con = client.containers.get("musing_pasteur")
     except:
-        response = {"error": "No Container Found" }
+        response = {"error": "No Container Found"}
         return Response(response)
     else:
 
@@ -53,12 +52,12 @@ def executeExploit(request):
         ter = str(res.output, 'UTF-8')
 
         print(type(ter))
-        result =  subs in ter
- 
+        result = subs in ter
+
         response = {"status": "Container Found",
-            "RES": result,
-            "m": ter
-         }
+                    "RES": result,
+                    "m": ter
+                    }
         return Response(response)
 
 
@@ -66,16 +65,15 @@ def executeExploit(request):
 def executeExploit1(request):
 
     containerId = request.data.get('conId')
-   
 
     response = {}
-    
+
     client = docker.from_env()
     con = False
     try:
         con = client.containers.get(containerId)
     except:
-        response = {"error": "No Container Found" }
+        response = {"error": "No Container Found"}
         return Response(response)
     else:
 
@@ -91,38 +89,41 @@ def executeExploit1(request):
         ter = str(res.output, 'UTF-8')
 
         print(type(ter))
-        result =  subs in ter
- 
+        result = subs in ter
+
         response = {"status": "Container Found",
-            'execution': '200',
-            "result": result,
-            "output": ter,
-         }
+                    'execution': '200',
+                    "result": result,
+                    "output": ter,
+                    }
         return Response(response)
+
 
 @api_view(['POST'])
 def executePIDshell(request):
 
     pid_path = './scripts/pid.sh'
-    os.chmod(pid_path, 0o755) 
+    os.chmod(pid_path, 0o755)
 
     output = subprocess.check_output(pid_path).decode()
     return Response({'execution': '200', 'output': output, 'result': True})
+
 
 @api_view(['POST'])
 def executeExposeHostFp(request):
 
     pid_path = './scripts/expose_host_file_path.sh'
-    os.chmod(pid_path, 0o755) 
+    os.chmod(pid_path, 0o755)
 
     output = subprocess.check_output(pid_path).decode()
     return Response({'execution': '200', 'output': output, 'result': True})
+
 
 @api_view(['POST'])
 def executeStressTest(request):
 
     pid_path = './scripts/stress_test.sh'
-    os.chmod(pid_path, 0o755) 
+    os.chmod(pid_path, 0o755)
 
     output = subprocess.check_output(pid_path).decode()
     return Response({'execution': '200', 'output': output, 'result': True})
@@ -132,9 +133,34 @@ def executeStressTest(request):
 def executeShowHashes(request):
 
     pid_path = './scripts/show_hashes.sh'
-    os.chmod(pid_path, 0o755) 
+    os.chmod(pid_path, 0o755)
 
     output = subprocess.check_output(pid_path).decode()
+    return Response({'execution': '200', 'output': output, 'result': True})
+
+
+@api_view(['POST'])
+def executeContainerAnalysis(request):
+
+    pid_path = './blue_team_scripts/DockerBenchmark.sh'
+    os.chmod(pid_path, 0o755)
+
+    output = subprocess.check_output(pid_path).decode()
+    return Response({'execution': '200', 'output': output, 'result': True})
+
+
+@api_view(['POST'])
+def executeDockerLog(request):
+
+    pid_path = './scripts/dockerLog.sh'
+
+    containerId = request.data.get('conId')
+
+    containerName = containerId
+    os.chmod(pid_path, 0o755)
+
+    output = subprocess.check_output(
+        args=[pid_path, containerName]).decode()
     return Response({'execution': '200', 'output': output, 'result': True})
 
 

@@ -10,4 +10,7 @@ urlpatterns = [
     path('executeStressTest', views.executeStressTest),
     path('executeShowHashes', views.executeShowHashes),
 
+    path('executeContainerAnalysis', views.executeContainerAnalysis),
+    path('executeDockerLog', views.executeDockerLog),
+
 ]
