@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 import docker
 import subprocess
 import os
+import re
 
 
 @api_view(['GET'])
@@ -160,7 +161,16 @@ def executeDockerLog(request):
     os.chmod(pid_path, 0o755)
 
     output = subprocess.check_output(
-        args=[pid_path, containerName]).decode()
+        args=[pid_path, containerName]).decode('utf-8')
+
+    # output = re.compile(r'\x1B[@-_][0-?]*[ -/]*[@-~]')
+    # output = output.sub('', output)
+
+    output = ''.join([char for char in output if ord(char)
+                     >= 32 and ord(char) <= 126])
+
+    # lines = output.split('\n')
+
     return Response({'execution': '200', 'output': output, 'result': True})
 
 
